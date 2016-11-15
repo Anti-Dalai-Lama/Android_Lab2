@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Лаба 2</string>
+    <string name="c">1</string>
+    <string name="b">←</string>
+    <string name="n1">1</string>
+    <string name="n2">2</string>
+    <string name="n3">3</string>
+    <string name="n4">4</string>
+    <string name="n5">5</string>
+    <string name="n6">6</string>
+    <string name="n7">7</string>
+    <string name="n8">8</string>
+    <string name="n9">9</string>
+    <string name="n0">0</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="mult">*</string>
+    <string name="div">/</string>
+    <string name="point">.</string>
+    <string name="eq">=</string>
+    <string name="clear">C</string>
+
+    <string name="title">Название</string>
+    <string name="description">Описание</string>
+    <string name="colorpicker">Выбор Цвета</string>
+    <string name="calculator">Калькулятор</string>
+    <string name="notes">Заметки</string>
+    <string name="create">Создать</string>
+    <string name="note">Заметка</string>
+    <string name="edit">Редактировать</string>
+    <string name="delete">Удалить</string>
+    <string name="picture">Изображение</string>
+
+    <string name="fillemptyfields">Заполните пустые поля</string>
+    <string name="nopic">У заметки нет изображения</string>
+
+    <string name="importance">Важность</string>
+    <string name="high">Высокая</string>
+    <string name="medium">Средняя</string>
+    <string name="low">Низкая</string>
+    <string name="none">Любая</string>
+    <string name="tofilter">Фильтровать</string>
+    <string name="cancel">Отмена</string>
+    <string name="save">Сохранить</string>
+    <string name="filter">Фильтр</string>
+    <string name="search">Поиск</string>
+</resources>

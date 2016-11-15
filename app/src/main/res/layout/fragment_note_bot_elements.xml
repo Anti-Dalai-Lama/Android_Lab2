@@ -1,0 +1,17 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.blablaarthur.lab2.NoteBotElementsFragment">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/editDesc"
+        android:lineSpacingExtra="0sp"
+        android:hint="@string/description"
+        android:gravity="fill_horizontal" />
+
+</FrameLayout>

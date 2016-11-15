@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">Laba 2</string>
+    <string name="c">1</string>
+    <string name="b">←</string>
+    <string name="n1">1</string>
+    <string name="n2">2</string>
+    <string name="n3">3</string>
+    <string name="n4">4</string>
+    <string name="n5">5</string>
+    <string name="n6">6</string>
+    <string name="n7">7</string>
+    <string name="n8">8</string>
+    <string name="n9">9</string>
+    <string name="n0">0</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="mult">*</string>
+    <string name="div">/</string>
+    <string name="point">.</string>
+    <string name="eq">=</string>
+    <string name="clear">C</string>
+
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="colorpicker">Color Picker</string>
+    <string name="calculator">Calculator</string>
+    <string name="notes">Notes</string>
+    <string name="create">Create</string>
+    <string name="note">Note</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="picture">Picture</string>
+
+    <string name="fillemptyfields">Fill empty fields</string>
+    <string name="nopic">There is no picture in this note</string>
+
+    <string name="importance">Importance</string>
+    <string name="high">High</string>
+    <string name="medium">Medium</string>
+    <string name="low">Low</string>
+    <string name="none">None</string>
+    <string name="tofilter">Filter</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="filter">Filter</string>
+    <string name="search">Search</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

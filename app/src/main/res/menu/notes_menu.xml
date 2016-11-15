@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/searchView"
+        android:title="@string/search"
+        android:icon="@drawable/ic_search"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="always">
+    </item>
+
+    <item android:id="@+id/filter_notes"
+        android:title="@string/filter"
+        android:icon="@drawable/ic_filter_list_white_24dp"
+        app:showAsAction="ifRoom">
+    </item>
+    <item android:id="@+id/add_note_icon"
+        android:title="@string/create"
+        android:icon="@drawable/ic_note_add_white_24dp"
+        app:showAsAction="always">
+    </item>
+
+</menu>
