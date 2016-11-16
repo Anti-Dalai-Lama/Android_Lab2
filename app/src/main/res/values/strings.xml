@@ -44,8 +44,15 @@
     <string name="save">Save</string>
     <string name="filter">Filter</string>
     <string name="search">Search</string>
+    <string name="settings">Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="preference_file_key">my_preference</string>
+    <string name="night_mode_on">Night Mode Enabled</string>
+    <string name="night_mode_off">Night Mode Disabled</string>
+    <string name="text_size">Text Size</string>
+    <string name="small_text_size">Small</string>
+    <string name="normal_text_size">Normal</string>
+    <string name="large_text_size">Large</string>
+
 
 </resources>

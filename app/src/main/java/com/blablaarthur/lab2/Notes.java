@@ -1,9 +1,12 @@
 package com.blablaarthur.lab2;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -39,22 +42,44 @@ public class Notes extends AppCompatActivity {
     MenuItem search_menu_item;
     private static final int CREATE_NOTE = 101;
     private static final int EDIT_NOTE = 102;
+    private static final int SETTINGS = 103;
     private int FILTER = 3;
     private String searchText = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences sharedPref = getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        int theme = sharedPref.getInt("Theme", 1);
+        int textSize = sharedPref.getInt("TextSize", 1);
+        if(theme == 0){
+            switch (textSize){
+                case 0:
+                    setTheme(R.style.MyDarkTheme_SmallText);
+                    break;
+                case 1:
+                    setTheme(R.style.MyDarkTheme);
+                    break;
+                case 2:
+                    setTheme(R.style.MyDarkTheme_LargeText);
+                    break;
+            }
+        }
+        else{
+            switch (textSize){
+                case 0:
+                    setTheme(R.style.AppTheme_SmallText);
+                    break;
+                case 1:
+                    setTheme(R.style.AppTheme_NormalText);
+                    break;
+                case 2:
+                    setTheme(R.style.AppTheme_LargeText);
+                    break;
+            }
+        }
         setContentView(R.layout.notes);
-//        notes = new ArrayList<>(1);
-//        notes.add(new Note(1, "Note 1", "Note 1 description", 1, Calendar.getInstance(), ""));
-//        notes.add(new Note(2, "Note 2", "Note 2 description", 2, Calendar.getInstance(), ""));
-//        notes.add(new Note(3, "Note 3", "Note 3 description", 0, Calendar.getInstance(), ""));
-//        Calendar c = Calendar.getInstance();
-//        c.set(2016, 9, 5, 12, 3);
-//        notes.add(new Note(4, "Note 4", "Note 4 description", 2, c, ""));
-//        notes.add(new Note(5, "Note 5", "Note 5 description", 1, Calendar.getInstance(), ""));
-
 
         notesAdapter = new NoteAdapter(this, notes);
         notesListView = (ListView) findViewById(R.id.notesListView);
@@ -157,9 +182,10 @@ public class Notes extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent myIntent;
         switch (item.getItemId()){
             case R.id.add_note_icon:
-                Intent myIntent = new Intent(Notes.this,
+                myIntent = new Intent(Notes.this,
                         CreateNote.class);
                 myIntent.setAction("android.intent.myaction.CREATE");
                 startActivityForResult(myIntent, CREATE_NOTE);
@@ -173,6 +199,10 @@ public class Notes extends AppCompatActivity {
                 adb.create();
                 adb.show();
                 break;
+            case R.id.settings:
+                myIntent = new Intent(Notes.this,
+                        Settings.class);
+                startActivityForResult(myIntent, SETTINGS);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -189,11 +219,15 @@ public class Notes extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("A_R_T", "ONRESULT");
         if(requestCode == CREATE_NOTE && resultCode == RESULT_OK){
 
         }
         else if(requestCode == EDIT_NOTE && resultCode == RESULT_OK){
 
+        }
+        else if(requestCode == SETTINGS){
+            recreate();
         }
         getNotes();
     }

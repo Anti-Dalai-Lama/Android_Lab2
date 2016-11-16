@@ -45,4 +45,13 @@
     <string name="save">Сохранить</string>
     <string name="filter">Фильтр</string>
     <string name="search">Поиск</string>
+    <string name="settings">Настройки</string>
+
+    <string name="preference_file_key">my_preference</string>
+    <string name="night_mode_on">Ночной режим включен</string>
+    <string name="night_mode_off">Ночной режим выключен</string>
+    <string name="text_size">Размер текста</string>
+    <string name="small_text_size">Маленький</string>
+    <string name="normal_text_size">Нормальный</string>
+    <string name="large_text_size">Крупный</string>
 </resources>

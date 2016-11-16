@@ -8,4 +8,52 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="MyDarkTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="actionBarTheme">@style/MyDarkActionBar</item>
+        <!--<item name="android:textViewStyle">@style/MyDarkTextView</item>-->
+        <item name="android:textSize">18sp</item>
+        <item name="android:windowBackground">@color/darkBack</item>
+        <item name="editTextStyle">@style/MyDarkEditText</item>
+        <!--<item name="popupMenuStyle">@style/myPopupMenu</item>-->
+        <item name="colorAccent">@color/darkBack</item>
+    </style>
+
+    <style name="MyDarkActionBar" parent="Base.Widget.AppCompat.ActionBar">
+        <item name="background">@color/darkActionBar</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="android:textColorPrimary">@color/white</item> <!--белый заголовок эктивити-->
+    </style>
+
+    <style name="MyDarkEditText" parent="@android:style/Widget.EditText">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="MyDarkTheme.SmallText">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="MyDarkTheme.LargeText">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="AppTheme.NormalText">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="AppTheme.SmallText">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="AppTheme.LargeText">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <!--<style name="MyDarkTextView" parent="@android:style/Widget.TextView">-->
+        <!--<item name="android:textColorPrimary">@color/white</item> &lt;!&ndash;отображение в списке и создании текствью&ndash;&gt;-->
+    <!--</style>-->
+
+    <!--<style name="myPopupMenu" parent="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large">-->
+        <!--<item name="android:textColorPrimary">@color/darkBack</item>-->
+    <!--</style>-->
+
 </resources>

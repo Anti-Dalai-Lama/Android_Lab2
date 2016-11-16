@@ -1,6 +1,8 @@
 package com.blablaarthur.lab2;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +15,13 @@ public class ImageWatcher extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences sharedPref = getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        int theme = sharedPref.getInt("Theme", 1);
+        if(theme == 1)
+            setTheme(R.style.AppTheme);
+        else
+            setTheme(R.style.MyDarkTheme);
         setContentView(R.layout.activity_image_watcher);
 
         image = (ImageView) findViewById(R.id.imageWatcher);

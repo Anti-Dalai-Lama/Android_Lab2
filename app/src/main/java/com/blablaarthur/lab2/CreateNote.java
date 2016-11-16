@@ -2,7 +2,9 @@ package com.blablaarthur.lab2;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.PersistableBundle;
@@ -44,6 +46,36 @@ public class CreateNote extends AppCompatActivity implements DatePickerDialog.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences sharedPref = getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        int theme = sharedPref.getInt("Theme", 1);
+        int textSize = sharedPref.getInt("TextSize", 1);
+        if(theme == 0){
+            switch (textSize){
+                case 0:
+                    setTheme(R.style.MyDarkTheme_SmallText);
+                    break;
+                case 1:
+                    setTheme(R.style.MyDarkTheme);
+                    break;
+                case 2:
+                    setTheme(R.style.MyDarkTheme_LargeText);
+                    break;
+            }
+        }
+        else{
+            switch (textSize){
+                case 0:
+                    setTheme(R.style.AppTheme_SmallText);
+                    break;
+                case 1:
+                    setTheme(R.style.AppTheme_NormalText);
+                    break;
+                case 2:
+                    setTheme(R.style.AppTheme_LargeText);
+                    break;
+            }
+        }
         setContentView(R.layout.activity_create_note);
         Log.d("A_R_T", "OnCreate");
         title = (EditText) findViewById(R.id.editTitle);
@@ -53,6 +85,12 @@ public class CreateNote extends AppCompatActivity implements DatePickerDialog.On
         image.setScaleType(ImageView.ScaleType.CENTER_CROP);
         time = (TextView) findViewById(R.id.textTime);
         date = (TextView) findViewById(R.id.textDate);
+
+        if(theme == 0){
+            title.setTextColor(getResources().getColor(R.color.white));
+            time.setTextColor(getResources().getColor(R.color.white));
+            date.setTextColor(getResources().getColor(R.color.white));
+        }
 
         ActionBar bar = getSupportActionBar();
         bar.setHomeButtonEnabled(true);

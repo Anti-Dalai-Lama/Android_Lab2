@@ -1,6 +1,7 @@
 package com.blablaarthur.lab2;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -43,6 +44,13 @@ class NoteAdapter extends ArrayAdapter<Note> {
         TextView title = (TextView) myView.findViewById(R.id.titleTextView);
         TextView datetime = (TextView) myView.findViewById(R.id.dateTextView);
 
+        SharedPreferences sharedPref = getContext().getSharedPreferences(
+                getContext().getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        int theme = sharedPref.getInt("Theme", 1);
+        if(theme == 0) {
+            title.setTextColor(getContext().getResources().getColor(R.color.white));
+            datetime.setTextColor(getContext().getResources().getColor(R.color.white));
+        }
         ImageView image = (ImageView) myView.findViewById(R.id.noteImage);
         ImageView imp = (ImageView) myView.findViewById(R.id.impImage);
 
@@ -101,89 +109,10 @@ class NoteAdapter extends ArrayAdapter<Note> {
         return notes.get(position);
     }
 
-    //public Filter getFilter() {
-    //    return mFilter;
-    //}
 
     @Override
     public int getCount() {
         return notes.size();
     }
 
-
-//    public void removeAt(int pos){
-//        filtered.remove(pos);
-//    }
-
-    public void removeById(int id){
-//        int pos = -1;
-//        for(int i = 0; i < filtered.size(); i++){
-//            if(filtered.get(i).Id == id)
-//                pos = i;
-//        }
-//        if(pos >= 0)
-//            filtered.remove(pos);
-//        pos = -1;
-//        for(int i = 0; i < original.size(); i++){
-//            if(original.get(i).Id == id)
-//                pos = i;
-//        }
-//        if(pos >= 0)
-//            original.remove(pos);
-    }
-
-    public void changeById(int id, Note note_new){
-//        int pos = -1;
-//        for(int i = 0; i < filtered.size(); i++){
-//            if(filtered.get(i).Id == id)
-//                pos = i;
-//        }
-//        if(pos >= 0)
-//            filtered.set(pos, note_new);
-//        pos = -1;
-//        for(int i = 0; i < original.size(); i++){
-//            if(original.get(i).Id == id)
-//                pos = i;
-//        }
-//        if(pos >= 0)
-//            original.set(pos, note_new);
-    }
-
-//    private class ItemFilter extends Filter {
-//        @Override
-//        protected Filter.FilterResults performFiltering(CharSequence constraint) {
-//
-//            String filterString = constraint.toString().toLowerCase();
-//
-//            Filter.FilterResults results = new Filter.FilterResults();
-//
-//            final List<Note> list = original;
-//
-//            int count = list.size();
-//            final List<Note> nlist = new ArrayList<Note>(count);
-//
-//            Note filterableNote ;
-//
-//            for (int i = 0; i < count; i++) {
-//                filterableNote = list.get(i);
-//                if (filterableNote.Description.toLowerCase().contains(filterString) ||
-//                        filterableNote.Title.toLowerCase().contains(filterString)) {
-//                    nlist.add(filterableNote);
-//                }
-//            }
-//
-//            results.values = nlist;
-//            results.count = nlist.size();
-//
-//            return results;
-//        }
-//
-//        @SuppressWarnings("unchecked")
-//        @Override
-//        protected void publishResults(CharSequence constraint, FilterResults results) {
-//            filtered = (List<Note>) results.values;
-//            notifyDataSetChanged();
-//        }
-//
-//    }
 }
