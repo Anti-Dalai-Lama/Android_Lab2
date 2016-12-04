@@ -45,7 +45,6 @@ public class CreateNote extends AppCompatActivity implements DatePickerDialog.On
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("A_R_T", "OnCreate");
         super.onCreate(savedInstanceState);
         SharedPreferences sharedPref = getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
@@ -78,7 +77,6 @@ public class CreateNote extends AppCompatActivity implements DatePickerDialog.On
             }
         }
         setContentView(R.layout.activity_create_note);
-        Log.d("A_R_T", "OnCreate");
         title = (EditText) findViewById(R.id.editTitle);
         desc = (EditText) findViewById(R.id.editDesc);
         imp = (ImageView) findViewById(R.id.imp);
@@ -275,7 +273,6 @@ public class CreateNote extends AppCompatActivity implements DatePickerDialog.On
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        Log.d("A_R_T", "onSave");
         note.Title = title.getText().toString();
         note.Description = desc.getText().toString();
         note.Importance = importance;
@@ -287,7 +284,6 @@ public class CreateNote extends AppCompatActivity implements DatePickerDialog.On
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        Log.d("A_R_T", "onRestore");
         note = savedInstanceState.getParcelable("Note");
 
         title.setText(note.Title);

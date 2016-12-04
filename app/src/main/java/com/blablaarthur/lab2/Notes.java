@@ -1,5 +1,6 @@
 package com.blablaarthur.lab2;
 
+import android.*;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.VoiceInteractor;
@@ -7,10 +8,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -24,7 +27,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
+import java.security.Permission;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -118,8 +123,6 @@ public class Notes extends AppCompatActivity {
         NotesGetter ng = new NotesGetter();
         ng.execute(new DBAdapter(this));
 
-        if(!NotificationService.running)
-            startService(new Intent(this, NotificationService.class));
     }
 
     @Override

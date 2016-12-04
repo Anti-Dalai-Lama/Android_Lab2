@@ -25,7 +25,6 @@ public class NotificationService extends Service {
     NotificationManager nm;
     NotificationCompat.Builder notification;
     DBAdapter db;
-    static boolean running = false;
 
     @Override
     public void onCreate(){
@@ -35,39 +34,29 @@ public class NotificationService extends Service {
     }
 
     public int onStartCommand(Intent intent, int flags, int startId){
-        running = true;
         db = new DBAdapter(this);
-        Log.d("A_R_T", "START NOT");
         checkNotification();
         return START_STICKY;
     }
 
     void sendNotif(int noteid, String title) {
-        try {
+        Intent intent = new Intent(getApplicationContext(), CreateNote.class);
+        intent.setAction("android.intent.myaction.WATCH");
+        intent.putExtra("Id", noteid);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
-            Intent intent = new Intent(getApplicationContext(), CreateNote.class);
-            intent.setAction("android.intent.myaction.WATCH");
-            intent.putExtra("Id", noteid);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
+        notification = new NotificationCompat.Builder(this)
+                .setContentIntent(pIntent)
+                .setSmallIcon(R.drawable.ic_action_name)
+                .setContentTitle(title)
+                .setContentText("Tap to watch")
+                .setTicker(title)
+                .setAutoCancel(true);
 
-            notification = new NotificationCompat.Builder(this)
-                    .setContentIntent(pIntent)
-                    .setSmallIcon(R.drawable.ic_action_name)
-                    .setContentTitle(title)
-                    .setContentText("Tap to watch")
-                    .setTicker(title)
-                    .setAutoCancel(true);
-
-            Notification n = notification.build();
-            //n.flags |= Notification.FLAG_AUTO_CANCEL | Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS;
-
-            nm.notify(noteid, n);
-        }
-        catch (Exception e){
-            Log.d("A_R_T", e.toString());
-        }
+        Notification n = notification.build();
+        nm.notify(noteid, n);
     }
 
     void checkNotification(){
@@ -77,8 +66,7 @@ public class NotificationService extends Service {
                 Note topnote = null;
                 while (true){
                     try {
-                        TimeUnit.SECONDS.sleep(5);
-                        Log.d("A_R_T", "NOT TICK");
+                        TimeUnit.SECONDS.sleep(15);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -92,21 +80,6 @@ public class NotificationService extends Service {
                             topnote = n;
                             sendNotif(topnote.Id, topnote.Title);
                         }
-                        Log.d("A_R_T", String.valueOf(n.Id) + " " + n.DateTime);
-//                        now = Calendar.getInstance();
-//                        String time = n.DateTime.split(" ")[0];
-//                        //if(CalendarConverter.compareTime(time, String.valueOf(now.get(Calendar.HOUR_OF_DAY)) + ":" + String.valueOf(now.get(Calendar.MINUTE))) == 1){
-//                        //    topnote = n;
-//                        if (CalendarConverter.compareTime(time, String.valueOf(now.get(Calendar.HOUR_OF_DAY)) + ":" + String.valueOf(now.get(Calendar.MINUTE))) == 0) {
-//                            Log.d("A_R_T", String.valueOf(n.Id));
-//                            try {
-//                                sendNotif(n.Id, n.Title);
-//                            } catch (Exception e) {
-//                                Log.d("A_R_T", e.toString());
-//                            }
-                        //}
-                        //    break;
-                        //}
                     }
                     db.closeDB();
 
