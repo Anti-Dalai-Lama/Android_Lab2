@@ -1,6 +1,7 @@
 package com.blablaarthur.lab2;
 
 import android.Manifest;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -67,6 +68,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        if(!isMyServiceRunning(NotificationService.class)){
+            Intent serviceIntent = new Intent(this, NotificationService.class);
+            Toast.makeText(this,"Not running", Toast.LENGTH_LONG).show();
+            startService(serviceIntent);
+        }
+
     }
 
     @Override
@@ -85,5 +92,15 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
