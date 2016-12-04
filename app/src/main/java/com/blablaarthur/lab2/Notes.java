@@ -1,12 +1,15 @@
 package com.blablaarthur.lab2;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.app.VoiceInteractor;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -25,6 +28,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Артур on 04.10.2016.
@@ -46,8 +50,11 @@ public class Notes extends AppCompatActivity {
     private int FILTER = 3;
     private String searchText = null;
 
+    ProgressDialog pd = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("A_R_T", "NOTES");
         super.onCreate(savedInstanceState);
         SharedPreferences sharedPref = getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
@@ -107,7 +114,12 @@ public class Notes extends AppCompatActivity {
         bar.setDisplayHomeAsUpEnabled(true);
         bar.setDisplayShowHomeEnabled(true);
 
-        getNotes();
+        //getNotes();
+        NotesGetter ng = new NotesGetter();
+        ng.execute(new DBAdapter(this));
+
+        if(!NotificationService.running)
+            startService(new Intent(this, NotificationService.class));
     }
 
     @Override
@@ -212,7 +224,8 @@ public class Notes extends AppCompatActivity {
             ListView lv = ((AlertDialog) dialog).getListView();
             if(which == Dialog.BUTTON_POSITIVE){
                 FILTER = lv.getCheckedItemPosition();
-                getNotes();
+                NotesGetter ng = new NotesGetter();
+                ng.execute(new DBAdapter(getBaseContext()));
             }
         }
     };
@@ -243,5 +256,44 @@ public class Notes extends AppCompatActivity {
         }
         db.closeDB();
         notesAdapter.notifyDataSetChanged();
+    }
+
+    class NotesGetter extends AsyncTask<DBAdapter, Void, Void>{
+
+        @Override
+        protected void onPreExecute() {
+            pd = new ProgressDialog(Notes.this);
+            pd.setMessage("Updating notes");
+            pd.setCancelable(false);
+            pd.show();
+        }
+        @Override
+        protected Void doInBackground(DBAdapter... params) {
+            notes.clear();
+            DBAdapter db = params[0];
+            db.openDB();
+            Cursor c = db.retrieve(searchText, FILTER);
+            while (c.moveToNext()) {
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                }
+                catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+                Note n = new Note(c.getInt(0), c.getString(1), c.getString(2), c.getInt(3), c.getString(4), c.getString(5));
+                notes.add(n);
+            }
+            db.closeDB();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            notesAdapter.notifyDataSetChanged();
+            if (pd != null && pd.isShowing()) {
+                pd.dismiss();
+            }
+        }
+
     }
 }

@@ -123,4 +123,13 @@ public class DBAdapter {
         curs = db.query(Database.TABLE_NAME, columns, Columns.IMP + " = " + String.valueOf(imp), null, null, null, null );
         return curs;
     }
+
+    public Cursor getNotification(String date){
+        String[] columns = {Columns.ID, Columns.TITLE, Columns.DESC, Columns.IMP, Columns.DATETIME, Columns.IMAGE};
+        Cursor curs = null;
+        String where = Columns.DATETIME + " LIKE ? ";
+        String[] whereparams = new String[]{"%" + date + "%"};
+        curs = db.query(Database.TABLE_NAME, columns, where, whereparams, null, null, Columns.DATETIME );
+        return curs;
+    }
 }

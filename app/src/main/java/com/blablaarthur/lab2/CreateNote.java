@@ -45,6 +45,7 @@ public class CreateNote extends AppCompatActivity implements DatePickerDialog.On
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("A_R_T", "OnCreate");
         super.onCreate(savedInstanceState);
         SharedPreferences sharedPref = getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
